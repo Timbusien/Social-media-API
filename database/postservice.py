@@ -28,7 +28,7 @@ def edit_post(post_id, post_photo):
 
 
 # Удалить пост
-def delete_post(user_id):
+def delete_post_db(user_id):
     my_db = next(get_database())
 
     check_post = my_db.query(UserPost).filter_by(id=user_id).first()

@@ -15,13 +15,13 @@ def add_comment(post_id, comment_text, user_id):
 
 
 # Удаление комментария
-def delete_comment(comment_id):
+def delete_comment_db(comment_id):
     my_db = next(get_database())
 
     delete = my_db.query(Comments).filter_by(id=comment_id).first()
 
     if delete:
-        my_db.delete(delete_comment)
+        my_db.delete(delete)
         my_db.commit()
 
         return 'Комментарий был успешно удалён'
