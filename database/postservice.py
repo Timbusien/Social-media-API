@@ -16,7 +16,7 @@ def add_post(user_id, post_text):
 
 
 # Добавить фото для поста
-def edit_post(post_id, post_photo):
+def add_post_photo(post_id, post_photo):
     my_db = next(get_database())
 
     new_post = Photo(post_id=post_id, post_photo=post_photo)
@@ -63,7 +63,7 @@ def get_exact_post(user_id):
         return False
 
 
-def edit_post_db(post_id, user_id, new_text):
+def edit_post(post_id, user_id, new_text):
     my_db = next(get_database())
 
     exact_post = my_db.query(UserPost).filter_by(id=post_id, user_id=user_id).first()

@@ -23,9 +23,7 @@ def delete_comment_db(comment_id):
     if delete:
         my_db.delete(delete)
         my_db.commit()
-
         return 'Комментарий был успешно удалён'
-
     else:
         return False
 
@@ -39,9 +37,9 @@ def change_comment(comment_id, new_comment):
     if change:
         change.comment_text = new_comment
         my_db.commit()
-
         return 'Комментарий был успешно удалён'
-
+    else:
+        return False
 
 # Получить все комментарии
 def get_post_comment(post_id):

@@ -10,7 +10,7 @@ def register_user(name, surname, email, number, city, password):
     check = my_db.query(User).filter_by(email=email).first()
 
     if check:
-        return True
+        return 'Такой пользователь уже есть'
 
     new_user = User(name=name,
                     surname=surname,
@@ -35,7 +35,8 @@ def login_user(email, password):
             return check
         elif check.password != password:
             return 'Неверный пароль'
-    return 'Ошибка данных'
+    else:
+        return 'Ошибка данных'
 
 
 # Добавить фото профиля
@@ -47,10 +48,9 @@ def add_profile_photo_my_db(user_id, profile_photo):
     if check:
         check.profile_photo = profile_photo
         my_db.commit()
-
         return 'Фото профиля успешно добавлено'
-
-    return False
+    else:
+        return False
 
 
 # Изменить данные
@@ -78,10 +78,9 @@ def delete_user_photo(user_id):
     if check:
         check.profile_photo = 'None'
         my_db.commit()
-
         return 'Фото профиля было успешно удалено'
-
-    return False
+    else:
+        return False
 
 
 # Получение всех пользователей
@@ -94,7 +93,7 @@ def get_all_users():
 
 
 # Получить информацию
-def get_info_user(user_id):
+def get_exact_user(user_id):
     my_db = next(get_database())
 
     user_info = my_db.query(User).filter_by(id=user_id).first()

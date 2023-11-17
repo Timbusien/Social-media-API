@@ -27,8 +27,12 @@ async def edit_users_photo(new_photo_file: UploadFile, user_id: int):
 
 # Удаление фотографии
 @photo_router.delete('/delete-photo')
-async def delete_users_photo(user_id: int):
-    pass
+async def delete_users_photo(delete_photo_file, user_id: int):
+    with open(f'media/{delete_photo_file.filename}', 'wb') as file:
+        user_photo = await delete_photo_file.read()
+        file.write(user_photo)
+
+    return {'message': 'Successfully deleted'}
 
 
 
