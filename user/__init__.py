@@ -12,7 +12,7 @@ class RegisterUserValidator(BaseModel):
     name: str
     surname: str
     email: str
-    phone_number:str
+    number:str
     city: str
     password: str
 

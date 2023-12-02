@@ -54,19 +54,29 @@ def add_profile_photo_my_db(user_id, profile_photo):
 
 
 # Изменить данные
-def change_data(name, surname, number, city, password):
+def change_data_my_db(user_id, edit_data, new_data):
     my_db = next(get_database())
+    exact_user = my_db.query(User).filter_by(user_id=user_id).first()
 
-    change_user = User(name=name,
-                    surname=surname,
-                    number=number,
-                    city=city,
-                    password=password,
-                    reg_date=datetime.now())
-    my_db.add(change_user)
-    my_db.commit()
+    if exact_user:
+        if edit_data == 'name':
+            exact_user.name = new_data
+        elif edit_data == 'surname':
+            exact_user.surname = new_data
+        elif edit_data == 'email':
+            exact_user.email = new_data
+        elif edit_data == 'phone_number':
+            exact_user.number = new_data
+        elif edit_data == 'city':
+            exact_user.city = new_data
+        elif edit_data == 'password':
+            exact_user.password = new_data
 
-    return 'Информация была успешно изменена'
+        my_db.commit()
+        return 'Данные были успешно изменены'
+    else:
+        return 'Пользователь не найден'
+
 
 
 # Удалить фото профиля
@@ -99,5 +109,18 @@ def get_exact_user(user_id):
     user_info = my_db.query(User).filter_by(id=user_id).first()
 
     return user_info
+
+
+# Удаление пользователя
+def delete_user_my_db(user_id):
+    my_db = next(get_database())
+    delete_user = my_db.query(User).filter_by(user_id=user_id).first()
+
+    if delete_user:
+        my_db.delete(delete_user)
+        my_db.commit()
+        return 'Пользователь успешно удалён'
+    else:
+        return 'Пользователь не найден'
 
 

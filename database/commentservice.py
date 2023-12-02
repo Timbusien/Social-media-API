@@ -18,7 +18,7 @@ def add_comment(post_id, comment_text, user_id):
 def delete_comment_db(comment_id):
     my_db = next(get_database())
 
-    delete = my_db.query(Comments).filter_by(id=comment_id).first()
+    delete = my_db.query(Comments).filter_by(comment_id=comment_id).first()
 
     if delete:
         my_db.delete(delete)
@@ -32,7 +32,7 @@ def delete_comment_db(comment_id):
 def change_comment(comment_id, new_comment):
     my_db = next(get_database())
 
-    change = my_db.query(Comments).filter_by(id=comment_id).first()
+    change = my_db.query(Comments).filter_by(comment_id=comment_id).first()
 
     if change:
         change.comment_text = new_comment

@@ -31,7 +31,7 @@ def add_post_photo(post_id, post_photo):
 def delete_post_db(user_id):
     my_db = next(get_database())
 
-    check_post = my_db.query(UserPost).filter_by(id=user_id).first()
+    check_post = my_db.query(UserPost).filter_by(user_id=user_id).first()
     post_photos = my_db.query(Photo).filter_by(user_id=user_id).first()
 
     if check_post:
@@ -66,7 +66,7 @@ def get_exact_post(user_id):
 def edit_post(post_id, user_id, new_text):
     my_db = next(get_database())
 
-    exact_post = my_db.query(UserPost).filter_by(id=post_id, user_id=user_id).first()
+    exact_post = my_db.query(UserPost).filter_by(post_id=post_id, user_id=user_id).first()
 
     if exact_post:
         exact_post.post_text = new_text

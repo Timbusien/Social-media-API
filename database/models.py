@@ -6,7 +6,7 @@ from database import Base
 # Таблица пользователя
 class User(Base):
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     surname = Column(String)
     email = Column(String)
@@ -20,7 +20,7 @@ class User(Base):
 # Таблица для публикаций
 class UserPost(Base):
     __tablename__ = 'user_posts'
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    post_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     post_text = Column(String)
     publish_data = Column(DateTime)
@@ -30,7 +30,7 @@ class UserPost(Base):
 # Таблица фоторафий
 class Photo(Base):
     __tablename__ = 'post_photos'
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    photo_id = Column(Integer, primary_key=True, autoincrement=True)
     post_id = Column(Integer, ForeignKey('user_photos.id'))
     post_photo = Column(String)
     post_fk = relationship(UserPost, lazy='subquery')
@@ -39,7 +39,7 @@ class Photo(Base):
 # Таблица комментариев
 class Comments(Base):
     __tablename__ = 'post_comments'
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    comment_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     post_id = Column(Integer, ForeignKey('users_posts.id'))
     comment_text = Column(String)
